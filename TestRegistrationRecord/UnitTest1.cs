@@ -6,48 +6,50 @@ namespace TestRegistrationRecord
     public class UnitTest1
     {
 
-        static IRegistrationRecord _largeRecord; // = GetLargeRecord();
+        static IRegistrationRecord? _largeRecord; 
+        static IRegistrationRecord? _record;
 
         [ClassInitialize()]
         public static void ClassInitialize(TestContext tc)
         {
+            _record = GetRecord();
           _largeRecord = GetLargeRecord();
         }
 
             [TestMethod]
         public void TestRegistrationCount()
         {
-            Assert.AreEqual(GetRecord().RegistrationCount(), 3);
+            Assert.AreEqual(_record?.RegistrationCount(), 3);
         }
 
         [TestMethod]
         public void TestLargeRegistrationCount()
         {
-            Assert.AreEqual(_largeRecord.RegistrationCount(), 10000);
+            Assert.AreEqual(_largeRecord?.RegistrationCount(), 10000);
         }
 
         [TestMethod]
         public void TestRegistrationFound()
         {
-            Assert.AreEqual(GetRecord().VehicleId("FG02 HJK"), "67890");
+            Assert.AreEqual(_record?.GetVehicleId("FG02 HJK"), "67890");
         }
 
         [TestMethod]
         public void TestLargeRegistrationFound()
         {
-            Assert.AreEqual(_largeRecord.VehicleId("675"), "12345");
+            Assert.AreEqual(_largeRecord?.GetVehicleId("675"), "12345");
         }
 
         [TestMethod]
         public void TestRegistrationFound_NoVehicle()
         {
-            Assert.IsNull(GetRecord().VehicleId("L33T H4X0R"));
+            Assert.IsNull(_record?.GetVehicleId("L33T H4X0R"));
         }
 
         [TestMethod]
         public void TestRegistrationNotFound()
         {
-            Assert.IsNull(GetRecord().VehicleId("FG02 XXX"));
+            Assert.IsNull(_record?.GetVehicleId("FG02 XXX"));
         }
 
         private static IRegistrationRecord GetRecord()

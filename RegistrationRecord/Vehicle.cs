@@ -8,6 +8,14 @@ namespace RegistrationRecord
         #region "static"
         public static IVehicle CreateInstance(string vehicleId)
         {
+            if (string.IsNullOrWhiteSpace(vehicleId))
+            {
+                throw new ArgumentException("Vehicle Id must be supplied");
+            }
+            if (!int.TryParse(vehicleId, out _) || vehicleId.Length != 5)
+            {
+                throw new ArgumentException("Vehicle Id must be 5 characters numeric");
+            }
             return new Vehicle(vehicleId);
         }
 

@@ -6,7 +6,7 @@ namespace RegistrationRecord
     internal class Registration: IRegistration
     {
 
-        #region "Static"
+        #region "static"
    
         const int MaxYearRange = 50;
         public static IRegistration CreateInstance(string registrationNumber, int year)

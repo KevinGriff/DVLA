@@ -32,7 +32,7 @@ namespace RegistrationRecord
             return $"Registration number '{registrationNumber}' assigned to vehicle '{vehicle?.VehicleId}'";
         }
 
-        public string? VehicleId(string registrationNumber)
+        public string? GetVehicleId(string registrationNumber)
         {
             var reg = GetRegistration(registrationNumber);
             if (reg == null)
