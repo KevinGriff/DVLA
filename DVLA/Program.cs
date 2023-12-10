@@ -13,11 +13,21 @@ internal class Program
             record.AddRegistrationRecord("FG02 HJK", 2002, "67890");
             record.AddRegistrationRecord("L33T H4X0R", 2022);
 
-            var details = record.GetVehicleDetails("AB01 CDE");
-
-            Console.WriteLine(details);
-
             Console.WriteLine($"There are {record.RegistrationCount()} entries in the registration record");
+
+            var registrationNumber = "FG02 HJK";
+            var vehicleId = record.GetVehicleId(registrationNumber);
+            Console.WriteLine($"Registration number '{registrationNumber}' assigned to vehicle '{vehicleId}'");
+
+            registrationNumber = "L33T H4X0R";
+            vehicleId = record.GetVehicleId(registrationNumber);
+            Console.WriteLine($"Registration number '{registrationNumber}' assigned to vehicle '{vehicleId}'");
+
+                //registrationNumber = "AB01 CDE";
+                //var details = record.GetVehicleDetails(registrationNumber);
+                //Console.WriteLine(details);
+
+
         }
         catch (Exception ex)
         {

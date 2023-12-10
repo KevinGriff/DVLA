@@ -19,14 +19,18 @@ namespace TestRegistrationRecord
         {
             Assert.AreEqual(_record?.RegistrationCount(), 3);
         }
-
+        [TestMethod]
+        public void TestRegistrationCount_none()
+        {
+            var record = RegistrationStore.CreateInstance();
+            Assert.AreEqual(record?.RegistrationCount(), 0);
+        }
 
         [TestMethod]
         public void TestRegistrationFound()
         {
             Assert.AreEqual(_record?.GetVehicleId("FG02 HJK"), "67890");
         }
-
 
         [TestMethod]
         public void TestRegistrationFound_NoVehicle()

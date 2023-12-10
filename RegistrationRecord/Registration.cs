@@ -15,7 +15,8 @@ namespace RegistrationRecord
             {
                 throw new ArgumentException("Registration Number must be supplied");
             }
-            // could also check against regex - or an external service?
+            // TODO: could also check against regex - or an external service?
+
             if (year > DateTime.Today.Year || year < DateTime.Today.Year - MaxYearRange)
             {
                 throw new ArgumentException("Year of Registration out of range");

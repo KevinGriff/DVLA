@@ -47,7 +47,7 @@ namespace RegistrationRecord
         {
             if (GetRegistration(registrationNumber) != null)
             {
-                throw new InvalidDataException($"Record already exists for registration '{registrationNumber}'");
+                throw new ArgumentException($"Record already exists for registration '{registrationNumber}'");
             }
             var reg = Registration.CreateInstance(registrationNumber, YearCreated);
             IVehicle? vehicle = null;
@@ -71,9 +71,10 @@ namespace RegistrationRecord
             {
                 return null;
             }
+            // TODO: could return most recent?
             if (reg.Count() > 1)
             {
-                throw new InvalidDataException($"Multiple records for registration '{registrationNumber}'");
+                throw new Exception($"Multiple records for registration '{registrationNumber}'");
             }
             return reg.First();
         }
