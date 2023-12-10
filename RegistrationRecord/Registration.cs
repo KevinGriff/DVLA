@@ -1,13 +1,12 @@
 ﻿using RegistrationRecord.Interfaces;
-using System.ComponentModel.DataAnnotations;
 
 namespace RegistrationRecord
 {
-    internal class Registration: IRegistration
+    internal class Registration : IRegistration
     {
 
         #region "static"
-   
+
         const int MaxYearRange = 50;
         public static IRegistration CreateInstance(string registrationNumber, int year)
         {
@@ -21,14 +20,14 @@ namespace RegistrationRecord
             {
                 throw new ArgumentException("Year of Registration out of range");
             }
-            
+
             return new Registration(registrationNumber, year);
         }
 
         #endregion
 
         #region "constructor"
-    
+
         internal Registration(string registrationNumber, int year)
         {
             RegistrationNumber = registrationNumber;
@@ -41,14 +40,14 @@ namespace RegistrationRecord
 
         public string RegistrationNumber { get; }
         public int YearCreated { get; }
- 
+
         public bool MatchRegistration(string registrationNumber)
         {
             if (string.IsNullOrEmpty(registrationNumber)) return false;
             registrationNumber = RemoveWhitespace(registrationNumber);
 
             return (string.Equals(registrationNumber, RegistrationKey, StringComparison.OrdinalIgnoreCase));
-         }
+        }
         #endregion
 
         private string RegistrationKey
@@ -58,7 +57,7 @@ namespace RegistrationRecord
         }
         private static string RemoveWhitespace(string inStr)
         {
-            return new string(inStr.Where(c => !char.IsWhiteSpace(c)).ToArray()); 
+            return new string(inStr.Where(c => !char.IsWhiteSpace(c)).ToArray());
         }
     }
 }

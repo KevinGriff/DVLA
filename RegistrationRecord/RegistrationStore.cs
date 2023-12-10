@@ -9,7 +9,7 @@ namespace RegistrationRecord
         public static IRegistrationRecord CreateInstance() { return new RegistrationStore(); }
 
         #region "IRegistrationRecord"
-       
+
         public int RegistrationCount()
         {
             return RecordStore?.Count ?? 0;
@@ -81,9 +81,9 @@ namespace RegistrationRecord
         private IVehicle? GetVehicle(IRegistration registration)
         {
             RecordStore.TryGetValue(registration, out IVehicle? vehicle);
-           
+
             return vehicle;
-         }
+        }
 
     }
 }

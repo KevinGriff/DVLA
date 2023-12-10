@@ -2,6 +2,6 @@
 {
     internal interface IVehicle
     {
-         string VehicleId { get;}
+        string VehicleId { get; }
     }
 }

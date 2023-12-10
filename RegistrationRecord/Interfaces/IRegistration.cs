@@ -2,8 +2,8 @@
 {
     internal interface IRegistration
     {
-         string RegistrationNumber { get; }
-         int YearCreated { get;  }
+        string RegistrationNumber { get; }
+        int YearCreated { get; }
 
         bool MatchRegistration(string registrationNumber);
     }

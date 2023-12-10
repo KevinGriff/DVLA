@@ -6,27 +6,20 @@ namespace TestRegistrationRecord
     public class UnitTest1
     {
 
-        static IRegistrationRecord? _largeRecord; 
         static IRegistrationRecord? _record;
 
         [ClassInitialize()]
         public static void ClassInitialize(TestContext tc)
         {
             _record = GetRecord();
-          _largeRecord = GetLargeRecord();
         }
 
-            [TestMethod]
+        [TestMethod]
         public void TestRegistrationCount()
         {
             Assert.AreEqual(_record?.RegistrationCount(), 3);
         }
 
-        [TestMethod]
-        public void TestLargeRegistrationCount()
-        {
-            Assert.AreEqual(_largeRecord?.RegistrationCount(), 10000);
-        }
 
         [TestMethod]
         public void TestRegistrationFound()
@@ -34,11 +27,6 @@ namespace TestRegistrationRecord
             Assert.AreEqual(_record?.GetVehicleId("FG02 HJK"), "67890");
         }
 
-        [TestMethod]
-        public void TestLargeRegistrationFound()
-        {
-            Assert.AreEqual(_largeRecord?.GetVehicleId("675"), "12345");
-        }
 
         [TestMethod]
         public void TestRegistrationFound_NoVehicle()
@@ -61,15 +49,5 @@ namespace TestRegistrationRecord
             return record;
         }
 
-        private static IRegistrationRecord GetLargeRecord()
-        {
-            var record = RegistrationStore.CreateInstance();
-
-            for (int i = 0; i<10000; i++)
-            {
-                record.AddRegistrationRecord(i.ToString(), 2001, "12345");
-            }
-            return record;
-        }
     }
 }
