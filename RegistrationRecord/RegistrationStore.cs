@@ -14,7 +14,15 @@ namespace RegistrationRecord
         {
             return RecordStore?.Count ?? 0;
         }
-
+        public int RegistrationAssignedCount()
+        {
+            return RecordStore.Where(r => r.Value != null).Count();
+           // return RecordStore?.Count ?? 0;
+        }
+        public decimal? TotalRegistrationCost()
+        {
+            return RecordStore.Sum(r => r.Key.Cost);
+        }
         public string GetVehicleDetails(string registrationNumber)
         {
             var reg = GetRegistration(registrationNumber);
@@ -43,19 +51,32 @@ namespace RegistrationRecord
             return GetVehicle(reg)?.VehicleId;
 
         }
-        public void AddRegistrationRecord(string registrationNumber, int YearCreated, string? VehicleId = null)
+        public void AddRegistrationRecord(string registrationNumber, int YearCreated, string? VehicleId = null, decimal? cost=null)
         {
             if (GetRegistration(registrationNumber) != null)
             {
                 throw new ArgumentException($"Record already exists for registration '{registrationNumber}'");
             }
-            var reg = Registration.CreateInstance(registrationNumber, YearCreated);
+            var reg = Registration.CreateInstance(registrationNumber, YearCreated, cost);
             IVehicle? vehicle = null;
             if (VehicleId != null)
             {
                 vehicle = Vehicle.CreateInstance(VehicleId);
             }
             AddToRecord(reg, vehicle);
+        }
+
+        public void AssignVehicle(string registrationNumber, string VehicleId)
+        {
+            var reg = GetRegistration(registrationNumber);
+            if (reg == null)
+            {
+                throw new ArgumentException($"Record does not exist for registration '{registrationNumber}'");
+            }
+            var vehicle = Vehicle.CreateInstance(VehicleId);
+
+            RecordStore[reg] = vehicle;
+
         }
 
         #endregion

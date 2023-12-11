@@ -4,7 +4,7 @@
     {
         string RegistrationNumber { get; }
         int YearCreated { get; }
-
+        decimal? Cost { get; }
         bool MatchRegistration(string registrationNumber);
     }
 }

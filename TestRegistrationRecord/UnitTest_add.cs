@@ -16,6 +16,8 @@ namespace TestRegistrationRecord
             Assert.AreEqual(_record?.RegistrationCount(), 1);
         }
 
+ 
+
         [TestMethod]
         public void TestRegistrationAddDuplicate()
         {

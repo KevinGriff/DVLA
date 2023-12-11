@@ -8,7 +8,7 @@ namespace RegistrationRecord
         #region "static"
 
         const int MaxYearRange = 50;
-        public static IRegistration CreateInstance(string registrationNumber, int year)
+        public static IRegistration CreateInstance(string registrationNumber, int year, decimal? cost)
         {
 
             if (string.IsNullOrWhiteSpace(registrationNumber))
@@ -22,17 +22,18 @@ namespace RegistrationRecord
                 throw new ArgumentException("Year of Registration out of range");
             }
 
-            return new Registration(registrationNumber, year);
+            return new Registration(registrationNumber, year, cost);
         }
 
         #endregion
 
         #region "constructor"
 
-        internal Registration(string registrationNumber, int year)
+        internal Registration(string registrationNumber, int year, decimal? cost)
         {
             RegistrationNumber = registrationNumber;
             YearCreated = year;
+            Cost = cost;
         }
 
         #endregion
@@ -41,6 +42,7 @@ namespace RegistrationRecord
 
         public string RegistrationNumber { get; }
         public int YearCreated { get; }
+        public decimal? Cost { get; }
 
         public bool MatchRegistration(string registrationNumber)
         {
